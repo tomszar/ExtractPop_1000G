@@ -25,7 +25,7 @@ done
 #Move to this directory
 cd $thisdir
 
-for chr in {1..23}
+for chr in {1..22}
 do
     echo "Writing job for $chr"
     echo "#!/bin/bash
