@@ -1,0 +1,27 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=24:00:00
+#PBS -l pmem=32gb
+#PBS -A jlt22_b_g_sc_default #jlt22_b_g_sc_default or open
+#PBS -j oe 
+
+#Download 1000G files if not there
+cd ~/scratch
+for chr in {1..23}
+do
+    if [ ! -f ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz ]; then
+        wget -q ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz
+    fi
+    if [ ! -f ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz.tbi ]; then
+        wget -q ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz.tbi
+    fi
+done
+
+#Go to this directory
+cd ~/work/ExtractPop/
+
+for chr in {1..23}
+do
+    vcftools --vcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --out EUR_1K_chr${chr} --plink
+done
+
