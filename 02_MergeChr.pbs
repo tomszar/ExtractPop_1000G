@@ -1,15 +1,14 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=24:00:00
-#PBS -l pmem=32gb
+#PBS -l pmem=16gb
 #PBS -A jlt22_b_g_sc_default #jlt22_b_g_sc_default or open
 #PBS -j oe
 
 #Go to folder
 ~/work/ExtractPop
 
-#Download plink
-wget http://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20200219.zip
-unzip plink*.zip
+#Activate conda env
+conda activate vcft
 
-./plink --merge-list ~/work/ExtractPop/merge_list.txt --make-bed --out ~/scratch/EUR_1K
+bcftools concat --file-list merge_list.txt --output-type z --output ~/scratch/EUR_1K
