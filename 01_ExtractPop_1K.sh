@@ -31,7 +31,7 @@ do
     echo "#!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=24:00:00
-#PBS -l pmem=16gb
+#PBS -l pmem=32gb
 #PBS -A jlt22_b_g_sc_default #jlt22_b_g_sc_default or open
 #PBS -j oe
 
@@ -41,7 +41,7 @@ cd ${thisdir}
 #Activate conda env
 conda activate vcft
 
-vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --out ~/scratch/EUR_1K_chr${chr} --plink" >> job_${chr}.pbs
+vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_chr${chr}" >> job_${chr}.pbs
 
     echo "Submitting job_${chr}.pbs"
     qsub job_${chr}.pbs
