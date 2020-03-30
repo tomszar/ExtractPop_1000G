@@ -6,7 +6,7 @@
 #PBS -j oe
 
 #Go to folder
-~/work/ExtractPop
+cd ~/work/ExtractPop
 
 #Activate conda env
 conda activate vcft
