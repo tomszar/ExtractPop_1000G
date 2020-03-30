@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=24:00:00
-#PBS -l pmem=16gb
+#PBS -l pmem=32gb
 #PBS -A jlt22_b_g_sc_default #jlt22_b_g_sc_default or open
 #PBS -j oe
 
@@ -12,4 +12,4 @@
 wget http://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20200219.zip
 unzip plink*.zip
 
-./plink --merge-list merge_list.txt --make-bed --out ~/scratch/EUR_1K
+./plink --merge-list ~/work/ExtractPop/merge_list.txt --make-bed --out ~/scratch/EUR_1K
