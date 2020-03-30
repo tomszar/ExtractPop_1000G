@@ -22,7 +22,7 @@ do
     fi
 done
 
-if [ ! -f hg19.fa.gz  ]; then
+if [ ! -f hg19.fa  ]; then
     wget -q https://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz
     gunzip hg19.fa.gz
 fi
