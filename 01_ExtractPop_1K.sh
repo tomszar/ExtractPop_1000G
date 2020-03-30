@@ -10,7 +10,7 @@
 #Getting the path to this folder
 thisdir=$(pwd)
 
-#Download 1000G files if not there
+#Download 1000G files if not there and the hg19.fa
 cd ~/scratch
 for chr in {1..22}
 do
@@ -21,6 +21,11 @@ do
         wget -q ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz.tbi
     fi
 done
+
+if [ ! -f hg19.fa.gz  ]; then
+    wget -q https://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz
+    gunzip hg19.fa.gz
+fi
 
 #Move to this directory
 cd $thisdir
@@ -41,7 +46,12 @@ cd ${thisdir}
 #Activate conda env
 conda activate vcft
 
-vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_chr${chr}" >> job_${chr}.pbs
+vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_temp_chr${chr}
+
+#Make sure to retain only biallelic SNPs, and remove duplicates
+bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f hg19.fa --output-file --output-type z EUR_1K_chr${chr}.vcf.gz
+
+rm ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf" >> job_${chr}.pbs
 
     echo "Submitting job_${chr}.pbs"
     qsub job_${chr}.pbs
