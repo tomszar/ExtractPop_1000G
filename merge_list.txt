@@ -1,22 +1,22 @@
-~/scratch/EUR_1K_chr1
-~/scratch/EUR_1K_chr2
-~/scratch/EUR_1K_chr3
-~/scratch/EUR_1K_chr4
-~/scratch/EUR_1K_chr5
-~/scratch/EUR_1K_chr6
-~/scratch/EUR_1K_chr7
-~/scratch/EUR_1K_chr8
-~/scratch/EUR_1K_chr9
-~/scratch/EUR_1K_chr10
-~/scratch/EUR_1K_chr11
-~/scratch/EUR_1K_chr12
-~/scratch/EUR_1K_chr13
-~/scratch/EUR_1K_chr14
-~/scratch/EUR_1K_chr15
-~/scratch/EUR_1K_chr16
-~/scratch/EUR_1K_chr17
-~/scratch/EUR_1K_chr18
-~/scratch/EUR_1K_chr19
-~/scratch/EUR_1K_chr20
-~/scratch/EUR_1K_chr21
-~/scratch/EUR_1K_chr22
+~/scratch/EUR_1K_chr1.ped ~/scratch/EUR_1K_chr1.map
+~/scratch/EUR_1K_chr2.ped ~/scratch/EUR_1K_chr2.map
+~/scratch/EUR_1K_chr3.ped ~/scratch/EUR_1K_chr3.map
+~/scratch/EUR_1K_chr4.ped ~/scratch/EUR_1K_chr4.map
+~/scratch/EUR_1K_chr5.ped ~/scratch/EUR_1K_chr5.map
+~/scratch/EUR_1K_chr6.ped ~/scratch/EUR_1K_chr6.map
+~/scratch/EUR_1K_chr7.ped ~/scratch/EUR_1K_chr7.map
+~/scratch/EUR_1K_chr8.ped ~/scratch/EUR_1K_chr8.map
+~/scratch/EUR_1K_chr9.ped ~/scratch/EUR_1K_chr9.map
+~/scratch/EUR_1K_chr10.ped ~/scratch/EUR_1K_chr10.map
+~/scratch/EUR_1K_chr11.ped ~/scratch/EUR_1K_chr11.map
+~/scratch/EUR_1K_chr12.ped ~/scratch/EUR_1K_chr12.map
+~/scratch/EUR_1K_chr13.ped ~/scratch/EUR_1K_chr13.map
+~/scratch/EUR_1K_chr14.ped ~/scratch/EUR_1K_chr14.map
+~/scratch/EUR_1K_chr15.ped ~/scratch/EUR_1K_chr15.map
+~/scratch/EUR_1K_chr16.ped ~/scratch/EUR_1K_chr16.map
+~/scratch/EUR_1K_chr17.ped ~/scratch/EUR_1K_chr17.map
+~/scratch/EUR_1K_chr18.ped ~/scratch/EUR_1K_chr18.map
+~/scratch/EUR_1K_chr19.ped ~/scratch/EUR_1K_chr19.map
+~/scratch/EUR_1K_chr20.ped ~/scratch/EUR_1K_chr20.map
+~/scratch/EUR_1K_chr21.ped ~/scratch/EUR_1K_chr21.map
+~/scratch/EUR_1K_chr22.ped ~/scratch/EUR_1K_chr22.map
