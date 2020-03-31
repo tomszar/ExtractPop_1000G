@@ -11,4 +11,8 @@ cd ~/work/ExtractPop
 #Activate conda env
 conda activate vcft
 
+#Concatenate chromosomes
 bcftools concat --file-list merge_list.txt --output-type z --output ~/scratch/EUR_1K.vcf.gz
+
+#Remove duplicates across chromosomes
+bcftools view ~/scratch/EUR_1K.vcf.gz | awk '/^#/{print}; !/^#/{if (!uniq[$3]++) print}' | gzip  > ~/scratch/EUR_1K_nodup.vcf.gz
