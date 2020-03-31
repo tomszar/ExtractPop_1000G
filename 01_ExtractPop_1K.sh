@@ -22,9 +22,9 @@ do
     fi
 done
 
-if [ ! -f hg19.fa  ]; then
-    wget -q https://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz
-    gunzip hg19.fa.gz
+if [ ! -f hs37d5.fa  ]; then
+    wget -q ftp://ftp.1000genomes.ebi.ac.uk//vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+    gunzip hs37d5.fa.gz
 fi
 
 #Move to this directory
@@ -32,7 +32,7 @@ cd $thisdir
 
 for chr in {1..22}
 do
-    echo "Writing job for $chr"
+    echo "Writing job for chromosome $chr"
     echo "#!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=24:00:00
@@ -46,16 +46,18 @@ cd ${thisdir}
 #Activate conda env
 conda activate vcft
 
+#Keep EUR individuals
 vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_temp_chr${chr}
 
 #Make sure to retain only biallelic SNPs, and remove duplicates
-bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f hg19.fa --output-file --output-type z EUR_1K_chr${chr}.vcf.gz
+bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f ~/scratch/hs37d5.fa --output-type z --output ~/scratch/EUR_1K_chr${chr}.vcf.gz
 
 rm ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf" >> job_${chr}.pbs
 
     echo "Submitting job_${chr}.pbs"
     qsub job_${chr}.pbs
-    echo "Waiting 5s for next chromosome..."
-    sleep 5s 
+    echo "Waiting 1s for next chromosome..."
+    sleep 1s 
+    echo ""
 
 done
