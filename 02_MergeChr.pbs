@@ -20,7 +20,7 @@ plink --vcf ~/scratch/EUR_1K.vcf.gz --make-bed --out ~/scratch/EUR_1K
 #Write SNPlist with mafs
 plink --bfile ~/scratch/EUR_1K --maf 0.01 --write-snplist --out ~/scratch/EUR_1K_Snps
 #Remove those with low mafs
-plink --bfile ~/scratch/EUR_1K --extract ~/scratch/EUR_1K_Snps.snplist -- out ~/scratch/EUR_1K_maf
+plink --bfile ~/scratch/EUR_1K --extract ~/scratch/EUR_1K_Snps.snplist --out ~/scratch/EUR_1K_maf
 #Write duplicates
 cat ~/scratch/EUR_1K_Snps.snplist | sort | uniq -d > ~/scratch/EUR_1K_duplicated_snps.snplist
 #Write a no_dup file
