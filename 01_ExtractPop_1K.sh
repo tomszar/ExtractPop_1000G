@@ -58,7 +58,7 @@ bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcfto
 rm ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf" >> job_${chr}.pbs
 
     echo "Submitting job_${chr}.pbs"
-    #qsub job_${chr}.pbs
+    qsub job_${chr}.pbs
     echo "Waiting 1s for next chromosome..."
     sleep 1s 
     echo ""
