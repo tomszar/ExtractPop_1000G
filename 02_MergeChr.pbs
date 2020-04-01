@@ -17,10 +17,11 @@ bcftools concat --file-list merge_list.txt --output-type z --output ~/scratch/EU
 #To plink bfiles
 plink --vcf ~/scratch/EUR_1K.vcf.gz --make-bed --out ~/scratch/EUR_1K
 
-#Write SNPlist
-plink --bfile ~/scratch/EUR_1K --maf --write-snplist --out ~/scratch/EUR_1K_Snps
+#Write SNPlist with mafs
+plink --bfile ~/scratch/EUR_1K --maf 0.01 --write-snplist --out ~/scratch/EUR_1K_Snps
+#Remove those with low mafs
+plink --bfile ~/scratch/EUR_1K --extract ~/scratch/EUR_1K_Snps.snplist -- out ~/scratch/EUR_1K_maf
 #Write duplicates
 cat ~/scratch/EUR_1K_Snps.snplist | sort | uniq -d > ~/scratch/EUR_1K_duplicated_snps.snplist
 #Write a no_dup file
-plink --bfile ~/scratch/EUR_1K --exclude ~/scratch/EUR_1K_duplicated_snps.snplist --make-bed --out ~/scratch/EUR_1K_nodup
-
+plink --bfile ~/scratch/EUR_1K_maf --exclude ~/scratch/EUR_1K_duplicated_snps.snplist --make-bed --out ~/scratch/EUR_1K_nodup
