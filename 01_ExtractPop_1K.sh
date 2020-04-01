@@ -50,15 +50,15 @@ conda activate vcft
 vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_temp_chr${chr}
 
 #Make sure to retain only biallelic SNPs, and remove duplicates
-bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f ~/scratch/hs37d5.fa | awk '/^#/{print}; !/^#/{if (!uniq[\$3]++) print}' | gzip  > ~/scratch/EUR_1K_chr${chr}.vcf.gz
+bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f ~/scratch/hs37d5.fa | bcftools view -q 0.01:minor | gzip  > ~/scratch/EUR_1K_chr${chr}.vcf.gz
 
 #Not used commands --output-type z --output ~/scratch/EUR_1K_chr${chr}.vcf.gz
-#bcftools view EUR_1K_chr22.vcf.gz | awk '/^#/{print}; !/^#/{if (!uniq[$3]++) print}' | gzip  > Test
+#bcftools view EUR_1K_chr22.vcf.gz | awk '/^#/{print}; !/^#/{if (!uniq[\$3]++) print}' | gzip  > Test
 
 rm ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf" >> job_${chr}.pbs
 
     echo "Submitting job_${chr}.pbs"
-    qsub job_${chr}.pbs
+    #qsub job_${chr}.pbs
     echo "Waiting 1s for next chromosome..."
     sleep 1s 
     echo ""

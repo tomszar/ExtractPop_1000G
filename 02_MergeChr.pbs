@@ -14,5 +14,13 @@ conda activate vcft
 #Concatenate chromosomes
 bcftools concat --file-list merge_list.txt --output-type z --output ~/scratch/EUR_1K.vcf.gz
 
-#Remove duplicates across chromosomes
-bcftools view ~/scratch/EUR_1K.vcf.gz | awk '/^#/{print}; !/^#/{if (!uniq[$3]++) print}' | gzip  > ~/scratch/EUR_1K_nodup.vcf.gz
+#To plink bfiles
+plink --vcf ~/scratch/EUR_1K.vcf.gz --make-bed --out ~/scratch/EUR_1K
+
+#Write SNPlist
+plink --bfile ~/scratch/EUR_1K --maf --write-snplist --out ~/scratch/EUR_1K_Snps
+#Write duplicates
+cat ~/scratch/EUR_1K_Snps.snplist | sort | uniq -d > ~/scratch/EUR_1K_duplicated_snps.snplist
+#Write a no_dup file
+plink --bfile ~/scratch/EUR_1K --exclude ~/scratch/EUR_1K_duplicated_snps.snplist --make-bed --out ~/scratch/EUR_1K_nodup
+
