@@ -20,3 +20,4 @@
 /storage/home/tug156/scratch/EUR_1K_chr20.recode.vcf
 /storage/home/tug156/scratch/EUR_1K_chr21.recode.vcf
 /storage/home/tug156/scratch/EUR_1K_chr22.recode.vcf
+/storage/home/tug156/scratch/EUR_1K_chrX.recode.vcf
