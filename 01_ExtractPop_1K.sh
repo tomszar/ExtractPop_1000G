@@ -43,6 +43,9 @@ for chr in {1..23}
 do
     if [ $chr -eq 23 ]; then
         chr=X
+        filename=ALL.chrX.phase3_shapeit2_mvncall_integrated_v1b.20130502.genotypes.vcf.gz
+    else
+        filename=ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz
     fi
     echo "Writing job for chromosome $chr"
     echo "#!/bin/bash
@@ -59,7 +62,7 @@ cd ${thisdir}
 conda activate vcft
 
 #Keep EUR individuals
-vcftools --gzvcf ~/scratch/ALL.chr${chr}.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_temp_chr${chr}
+vcftools --gzvcf ~/scratch/${filename} --remove-indels --keep EURlist.txt --recode --recode-INFO-all --out ~/scratch/EUR_1K_temp_chr${chr}
 
 #Make sure to retain only biallelic SNPs, and remove duplicates
 bcftools view -m2 -M2 -v snps ~/scratch/EUR_1K_temp_chr${chr}.recode.vcf | bcftools norm -d none -f ~/scratch/hs37d5.fa | bcftools view -q 0.01:minor | gzip  > ~/scratch/EUR_1K_chr${chr}.vcf.gz
